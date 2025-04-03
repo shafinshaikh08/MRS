@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ObjectId } = require('mongodb');
+const movieRoutes = require("./routes/recommendationRoutes"); // Import the recommendation routes
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -215,6 +216,9 @@ app.get('/api/test-db', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Routes
+app.use("/api", movieRoutes); // Use the recommendations route under '/api'
 
 // Start server
 app.listen(PORT, () => {
